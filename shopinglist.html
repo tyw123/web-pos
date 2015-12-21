@@ -34,6 +34,8 @@
             <button type="button" class="btn btn-default btn-sm  btn-block">  联系我们  </button>
         </div>
     </div>
+
+<script type="text/html" id="list">
     <h2 class="sub-header">确认订单信息</h2>
     <div class="table1">
         <table class="table table-striped">
@@ -42,16 +44,44 @@
                 <th>产品</th>
                 <th>单价</th>
                 <th>数量</th>
-                <th>优惠</th>
                 <th>小计</th>
             </tr>
             </thead>
             <tbody>
-
+            <% _.forEach(Receipt.item, function(Receipt) { %>
+            <tr>
+                <th><%- Receipt.name %></th>
+                <th><%- Receipt.price %></th>
+                <th><%- Receipt.num %></th>
+                <th><%- Receipt.total %></th>
+            </tr>
+            <% }); %>
             </tbody>
         </table>
     </div>
     <div class="table2">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>优惠</th>
+                <th>单价</th>
+                <th>数量</th>
+                <th>小计</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% _.forEach(Receipt.gift, function(Receipt) { %>
+            <tr>
+                <th><%- Receipt.name %></th>
+                <th><%- Receipt.price.toFixed(2) %></th>
+                <th><%- Receipt.num %></th>
+                <th><%- (Receipt.price*Receipt.num).toFixed(2) %></th>
+            </tr>
+            <% }); %>
+            </tbody>
+        </table>
+    </div>
+    <div class="table3">
         <table class="table table-striped">
             <tr>
                 <th>总商品金额</th>
@@ -60,7 +90,9 @@
                 <th> </th>
             </tr>
             <tr>
-
+                <th><%- (Number(Receipt.total)+Number(Receipt.saved)).toFixed(2) %></th>
+                <th><%- Receipt.total %></th>
+                <th><%- Receipt.saved %></th>
                 <th>
                     <button type="button" class="btn btn-primary btn-sm  btn-block">  一键购买  </button>
                 </th>
@@ -79,6 +111,7 @@
             </thead>
             <tbody>
             <tr>
+
                 <td>宝宝心里苦</td>
                 <td>吓倒本宝宝了</td>
                 <td>支付宝</td>
@@ -86,9 +119,10 @@
             </tbody>
         </table>
     </div>
+    </div>
+</script>
 
 
-</div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

@@ -9,7 +9,6 @@ $(document).ready(function(){
         item.push(temp);
         var itemp=JSON.stringify(item)
         localStorage.setItem("a",itemp);
-       // alert(localStorage.a);
         }
     });
     })

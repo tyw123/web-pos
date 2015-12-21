@@ -18,9 +18,10 @@ function infodeal_2(input_temp){//输入数据处理2,把相同的商品归类�
     });
    return item_temp
 }
-function getgoodinfo(item_temp){//根据编码，提取商品信息
+function getgoodinfo(item_temp,allItems){//根据编码，提取商品信息
     var item=[];
-    allItems = loadAllItems();
+  //  allItems = loadAllItems();
+
     item=_.map(item_temp,function(n){
         num=_.findIndex(allItems,'barcode',n.barcode)
         temp=_.clone(allItems[num]);
@@ -29,8 +30,8 @@ function getgoodinfo(item_temp){//根据编码，提取商品信息
         return temp})
     return item;
 }
-function getsaved(item){
-    allsaved=loadPromotions();
+function getsaved(item,allsaved){
+   // allsaved=loadPromotions();
     var gift=[];//$.extend({}, item);
     gift=_.map(item,function(n){
         num=_.indexOf(allsaved[0].barcodes,n.barcode)//不知道为什么这里_.findIndex用不了
@@ -88,12 +89,18 @@ function gettime(){
             time = year + '年' + month + '月' + date + '日 ' + hour + ':' + minute + ':' + second;
             return time;
 }
-function printInventory(inputs){
-    input_temp=infodeal_1(inputs);
-    item_temp=infodeal_2(input_temp);
-    item=getgoodinfo(item_temp);
-    gift=getsaved(item);
-    Receipt=calprice(gift,item);
-    result=print(Receipt);
-    return Receipt;
-}
+//function printInventory(inputs){
+//    var allItems=[];
+//    input_temp=infodeal_1(inputs);
+//    item_temp=infodeal_2(input_temp);
+//    $.ajax("test.json").done(function(sa){
+//        allItems=sa;
+//        item=getgoodinfo(item_temp,allItems);
+//        gift=getsaved(item);
+//        Receipt=calprice(gift,item);
+//       // result=print(Receipt);
+//
+//    });
+//
+//    return Receipt;
+//}
